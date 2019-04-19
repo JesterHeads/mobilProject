@@ -207,13 +207,13 @@ const dialog = __webpack_require__("tns-core-modules/ui/dialogs");
     },
 
     savePic() {
-      dialog.alert({
-        title: "the picture has been saved in your photo gallery",
-        okButtonText: "OK"
-      });
       imgSource.fromAsset(this.pictureFromCamera).then(img => {
         UIImageWriteToSavedPhotosAlbum(img);
-      });
+        this.alert();
+      }).finally(() => dialog.alert({
+        title: "the picture has been saved in your photo gallery",
+        okButtonText: "OK"
+      }));
     }
 
   }

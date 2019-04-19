@@ -170,7 +170,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
+
+
+const imgSource = __webpack_require__("../node_modules/tns-core-modules/image-source/image-source.js");
+
+const imgAsset = __webpack_require__("../node_modules/tns-core-modules/image-asset/image-asset.js");
+
+const fileSystem = __webpack_require__("../node_modules/tns-core-modules/file-system/file-system.js");
+
+const platform = __webpack_require__("../node_modules/tns-core-modules/platform/platform.js");
+
+const dialog = __webpack_require__("tns-core-modules/ui/dialogs");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data() {
@@ -191,6 +203,16 @@ __webpack_require__.r(__webpack_exports__);
         this.pictureFromCamera = imageAsset;
       }).catch(err => {
         console.log("Error -> " + err.message);
+      });
+    },
+
+    savePic() {
+      dialog.alert({
+        title: "the picture has been saved in your photo gallery",
+        okButtonText: "OK"
+      });
+      imgSource.fromAsset(this.pictureFromCamera).then(img => {
+        UIImageWriteToSavedPhotosAlbum(img);
       });
     }
 
@@ -311,7 +333,8 @@ var render = function() {
         [
           _c("Button", {
             staticClass: "btn btn-primary",
-            attrs: { text: "Take a picture", marginTop: "20" }
+            attrs: { text: "Take a picture", marginTop: "20" },
+            on: { tap: _vm.takePicture }
           }),
           _c("Image", {
             attrs: {
@@ -320,7 +343,14 @@ var render = function() {
               height: "300",
               stretch: "aspectFit"
             }
-          })
+          }),
+          _vm.pictureFromCamera
+            ? _c("Button", {
+                staticClass: "btn btn-primary",
+                attrs: { text: "Save on device", marginTop: "30" },
+                on: { tap: _vm.savePic }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -694,6 +724,13 @@ module.exports = require("tns-core-modules/application");
 /***/ (function(module, exports) {
 
 module.exports = require("tns-core-modules/bundle-entry-points");
+
+/***/ }),
+
+/***/ "tns-core-modules/ui/dialogs":
+/***/ (function(module, exports) {
+
+module.exports = require("tns-core-modules/ui/dialogs");
 
 /***/ }),
 

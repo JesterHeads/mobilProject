@@ -152,6 +152,300 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "../node_modules/tns-core-modules/data/observable/observable.js":
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _wrappedIndex = 0;
+
+var WrappedValue = function () {
+  function WrappedValue(wrapped) {
+    this.wrapped = wrapped;
+  }
+
+  WrappedValue.unwrap = function (value) {
+    return value instanceof WrappedValue ? value.wrapped : value;
+  };
+
+  WrappedValue.wrap = function (value) {
+    var w = _wrappedValues[_wrappedIndex++ % 5];
+    w.wrapped = value;
+    return w;
+  };
+
+  return WrappedValue;
+}();
+
+exports.WrappedValue = WrappedValue;
+var _wrappedValues = [new WrappedValue(null), new WrappedValue(null), new WrappedValue(null), new WrappedValue(null), new WrappedValue(null)];
+
+var Observable = function () {
+  function Observable() {
+    this._observers = {};
+  }
+
+  Observable.prototype.get = function (name) {
+    return this[name];
+  };
+
+  Observable.prototype.set = function (name, value) {
+    var oldValue = this[name];
+
+    if (this[name] === value) {
+      return;
+    }
+
+    var newValue = WrappedValue.unwrap(value);
+    this[name] = newValue;
+    this.notifyPropertyChange(name, newValue, oldValue);
+  };
+
+  Observable.prototype.on = function (eventNames, callback, thisArg) {
+    this.addEventListener(eventNames, callback, thisArg);
+  };
+
+  Observable.prototype.once = function (event, callback, thisArg) {
+    var list = this._getEventList(event, true);
+
+    list.push({
+      callback: callback,
+      thisArg: thisArg,
+      once: true
+    });
+  };
+
+  Observable.prototype.off = function (eventNames, callback, thisArg) {
+    this.removeEventListener(eventNames, callback, thisArg);
+  };
+
+  Observable.prototype.addEventListener = function (eventNames, callback, thisArg) {
+    if (typeof eventNames !== "string") {
+      throw new TypeError("Events name(s) must be string.");
+    }
+
+    if (typeof callback !== "function") {
+      throw new TypeError("callback must be function.");
+    }
+
+    var events = eventNames.split(",");
+
+    for (var i = 0, l = events.length; i < l; i++) {
+      var event_1 = events[i].trim();
+
+      var list = this._getEventList(event_1, true);
+
+      list.push({
+        callback: callback,
+        thisArg: thisArg
+      });
+    }
+  };
+
+  Observable.prototype.removeEventListener = function (eventNames, callback, thisArg) {
+    if (typeof eventNames !== "string") {
+      throw new TypeError("Events name(s) must be string.");
+    }
+
+    if (callback && typeof callback !== "function") {
+      throw new TypeError("callback must be function.");
+    }
+
+    var events = eventNames.split(",");
+
+    for (var i = 0, l = events.length; i < l; i++) {
+      var event_2 = events[i].trim();
+
+      if (callback) {
+        var list = this._getEventList(event_2, false);
+
+        if (list) {
+          var index_1 = this._indexOfListener(list, callback, thisArg);
+
+          if (index_1 >= 0) {
+            list.splice(index_1, 1);
+          }
+
+          if (list.length === 0) {
+            delete this._observers[event_2];
+          }
+        }
+      } else {
+        this._observers[event_2] = undefined;
+        delete this._observers[event_2];
+      }
+    }
+  };
+
+  Observable.prototype.notify = function (data) {
+    var observers = this._observers[data.eventName];
+
+    if (!observers) {
+      return;
+    }
+
+    for (var i = observers.length - 1; i >= 0; i--) {
+      var entry = observers[i];
+
+      if (entry.once) {
+        observers.splice(i, 1);
+      }
+
+      if (entry.thisArg) {
+        entry.callback.apply(entry.thisArg, [data]);
+      } else {
+        entry.callback(data);
+      }
+    }
+  };
+
+  Observable.prototype.notifyPropertyChange = function (name, value, oldValue) {
+    this.notify(this._createPropertyChangeData(name, value, oldValue));
+  };
+
+  Observable.prototype.hasListeners = function (eventName) {
+    return eventName in this._observers;
+  };
+
+  Observable.prototype._createPropertyChangeData = function (propertyName, value, oldValue) {
+    return {
+      eventName: Observable.propertyChangeEvent,
+      object: this,
+      propertyName: propertyName,
+      value: value,
+      oldValue: oldValue
+    };
+  };
+
+  Observable.prototype._emit = function (eventNames) {
+    var events = eventNames.split(",");
+
+    for (var i = 0, l = events.length; i < l; i++) {
+      var event_3 = events[i].trim();
+      this.notify({
+        eventName: event_3,
+        object: this
+      });
+    }
+  };
+
+  Observable.prototype._getEventList = function (eventName, createIfNeeded) {
+    if (!eventName) {
+      throw new TypeError("EventName must be valid string.");
+    }
+
+    var list = this._observers[eventName];
+
+    if (!list && createIfNeeded) {
+      list = [];
+      this._observers[eventName] = list;
+    }
+
+    return list;
+  };
+
+  Observable.prototype._indexOfListener = function (list, callback, thisArg) {
+    for (var i = 0; i < list.length; i++) {
+      var entry = list[i];
+
+      if (thisArg) {
+        if (entry.callback === callback && entry.thisArg === thisArg) {
+          return i;
+        }
+      } else {
+        if (entry.callback === callback) {
+          return i;
+        }
+      }
+    }
+
+    return -1;
+  };
+
+  Observable.propertyChangeEvent = "propertyChange";
+  return Observable;
+}();
+
+exports.Observable = Observable;
+
+var ObservableFromObject = function (_super) {
+  __extends(ObservableFromObject, _super);
+
+  function ObservableFromObject() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+
+    _this._map = {};
+    return _this;
+  }
+
+  ObservableFromObject.prototype.get = function (name) {
+    return this._map[name];
+  };
+
+  ObservableFromObject.prototype.set = function (name, value) {
+    var currentValue = this._map[name];
+
+    if (currentValue === value) {
+      return;
+    }
+
+    var newValue = WrappedValue.unwrap(value);
+    this._map[name] = newValue;
+    this.notifyPropertyChange(name, newValue, currentValue);
+  };
+
+  return ObservableFromObject;
+}(Observable);
+
+function defineNewProperty(target, propertyName) {
+  Object.defineProperty(target, propertyName, {
+    get: function get() {
+      return target._map[propertyName];
+    },
+    set: function set(value) {
+      target.set(propertyName, value);
+    },
+    enumerable: true,
+    configurable: true
+  });
+}
+
+function addPropertiesFromObject(observable, source, recursive) {
+  if (recursive === void 0) {
+    recursive = false;
+  }
+
+  Object.keys(source).forEach(function (prop) {
+    var value = source[prop];
+
+    if (recursive && !Array.isArray(value) && value && typeof value === "object" && !(value instanceof Observable)) {
+      value = fromObjectRecursive(value);
+    }
+
+    defineNewProperty(observable, prop);
+    observable.set(prop, value);
+  });
+}
+
+function fromObject(source) {
+  var observable = new ObservableFromObject();
+  addPropertiesFromObject(observable, source, false);
+  return observable;
+}
+
+exports.fromObject = fromObject;
+
+function fromObjectRecursive(source) {
+  var observable = new ObservableFromObject();
+  addPropertiesFromObject(observable, source, true);
+  return observable;
+}
+
+exports.fromObjectRecursive = fromObjectRecursive;
+
+/***/ }),
+
 /***/ "../node_modules/tns-core-modules/debugger/debugger.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1868,6 +2162,188 @@ function getFile(arg, destinationFilePath) {
 }
 
 exports.getFile = getFile;
+
+/***/ }),
+
+/***/ "../node_modules/tns-core-modules/image-asset/image-asset-common.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var observable = __webpack_require__("../node_modules/tns-core-modules/data/observable/observable.js");
+
+var platform = __webpack_require__("../node_modules/tns-core-modules/platform/platform.js");
+
+var ImageAsset = function (_super) {
+  __extends(ImageAsset, _super);
+
+  function ImageAsset() {
+    var _this = _super.call(this) || this;
+
+    _this._options = {
+      keepAspectRatio: true,
+      autoScaleFactor: true
+    };
+    return _this;
+  }
+
+  Object.defineProperty(ImageAsset.prototype, "options", {
+    get: function get() {
+      return this._options;
+    },
+    set: function set(value) {
+      this._options = value;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  Object.defineProperty(ImageAsset.prototype, "nativeImage", {
+    get: function get() {
+      return this._nativeImage;
+    },
+    set: function set(value) {
+      this._nativeImage = value;
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  ImageAsset.prototype.getImageAsync = function (callback) {};
+
+  return ImageAsset;
+}(observable.Observable);
+
+exports.ImageAsset = ImageAsset;
+
+function getAspectSafeDimensions(sourceWidth, sourceHeight, reqWidth, reqHeight) {
+  var widthCoef = sourceWidth / reqWidth;
+  var heightCoef = sourceHeight / reqHeight;
+  var aspectCoef = Math.min(widthCoef, heightCoef);
+  return {
+    width: Math.floor(sourceWidth / aspectCoef),
+    height: Math.floor(sourceHeight / aspectCoef)
+  };
+}
+
+exports.getAspectSafeDimensions = getAspectSafeDimensions;
+
+function getRequestedImageSize(src, options) {
+  var screen = platform.screen.mainScreen;
+  var reqWidth = options.width || Math.min(src.width, screen.widthPixels);
+  var reqHeight = options.height || Math.min(src.height, screen.heightPixels);
+
+  if (options && options.keepAspectRatio) {
+    var safeAspectSize = getAspectSafeDimensions(src.width, src.height, reqWidth, reqHeight);
+    reqWidth = safeAspectSize.width;
+    reqHeight = safeAspectSize.height;
+  }
+
+  return {
+    width: reqWidth,
+    height: reqHeight
+  };
+}
+
+exports.getRequestedImageSize = getRequestedImageSize;
+
+/***/ }),
+
+/***/ "../node_modules/tns-core-modules/image-asset/image-asset.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var common = __webpack_require__("../node_modules/tns-core-modules/image-asset/image-asset-common.js");
+
+var file_system_1 = __webpack_require__("../node_modules/tns-core-modules/file-system/file-system.js");
+
+global.moduleMerge(common, exports);
+
+var ImageAsset = function (_super) {
+  __extends(ImageAsset, _super);
+
+  function ImageAsset(asset) {
+    var _this = _super.call(this) || this;
+
+    if (typeof asset === "string") {
+      if (asset.indexOf("~/") === 0) {
+        asset = file_system_1.path.join(file_system_1.knownFolders.currentApp().path, asset.replace("~/", ""));
+      }
+
+      _this.nativeImage = UIImage.imageWithContentsOfFile(asset);
+    } else if (asset instanceof UIImage) {
+      _this.nativeImage = asset;
+    } else {
+      _this.ios = asset;
+    }
+
+    return _this;
+  }
+
+  Object.defineProperty(ImageAsset.prototype, "ios", {
+    get: function get() {
+      return this._ios;
+    },
+    set: function set(value) {
+      this._ios = value;
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  ImageAsset.prototype.getImageAsync = function (callback) {
+    var _this = this;
+
+    if (!this.ios && !this.nativeImage) {
+      callback(null, "Asset cannot be found.");
+    }
+
+    var srcWidth = this.nativeImage ? this.nativeImage.size.width : this.ios.pixelWidth;
+    var srcHeight = this.nativeImage ? this.nativeImage.size.height : this.ios.pixelHeight;
+    var requestedSize = common.getRequestedImageSize({
+      width: srcWidth,
+      height: srcHeight
+    }, this.options);
+
+    if (this.nativeImage) {
+      var newSize = CGSizeMake(requestedSize.width, requestedSize.height);
+      var resizedImage = this.scaleImage(this.nativeImage, newSize);
+      callback(resizedImage, null);
+      return;
+    }
+
+    var imageRequestOptions = PHImageRequestOptions.alloc().init();
+    imageRequestOptions.deliveryMode = 1;
+    imageRequestOptions.networkAccessAllowed = true;
+    PHImageManager.defaultManager().requestImageForAssetTargetSizeContentModeOptionsResultHandler(this.ios, requestedSize, 0, imageRequestOptions, function (image, imageResultInfo) {
+      if (image) {
+        var resultImage = _this.scaleImage(image, requestedSize);
+
+        callback(resultImage, null);
+      } else {
+        callback(null, imageResultInfo.valueForKey(PHImageErrorKey));
+      }
+    });
+  };
+
+  ImageAsset.prototype.scaleImage = function (image, requestedSize) {
+    var scaleFactor = this.options && this.options.autoScaleFactor === false ? 1.0 : 0.0;
+    UIGraphicsBeginImageContextWithOptions(requestedSize, false, scaleFactor);
+    image.drawInRect(CGRectMake(0, 0, requestedSize.width, requestedSize.height));
+    var resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultImage;
+  };
+
+  return ImageAsset;
+}(common.ImageAsset);
+
+exports.ImageAsset = ImageAsset;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("../node_modules/nativescript-dev-webpack/node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 

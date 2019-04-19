@@ -2,8 +2,9 @@
 	<Page class="page">
 		<ActionBar title="AlterPicture"></ActionBar>
 		<StackLayout>
-			<Button text="Take a picture" class="btn btn-primary" marginTop="20"></Button>
+			<Button text="Take a picture" class="btn btn-primary" marginTop="20" @tap="takePicture"></Button>
             <Image :src="pictureFromCamera" width="300" height="300" stretch="aspectFit"></Image>
+			<Button v-if="pictureFromCamera" text="Save on device" class="btn btn-primary" marginTop="30" @tap="savePic"></Button>
 		</StackLayout>
 	</Page>
 </template>
@@ -11,6 +12,13 @@
 <script>
 import * as camera from "nativescript-camera";
 import * as http from "http";
+
+const imgSource = require("image-source")
+const imgAsset = require("image-asset")
+const fileSystem = require ("file-system")
+const platform = require("platform")
+const dialog = require("tns-core-modules/ui/dialogs")
+
 export default {
 	data() {
 		return {
@@ -27,7 +35,16 @@ export default {
 			.catch(err => {
 				console.log("Error -> " + err.message);
 			});
-		}
+		},
+		savePic(){
+			dialog.alert({
+					title : "the picture has been saved in your photo gallery",
+					okButtonText : "OK"
+			})
+			imgSource.fromAsset(this.pictureFromCamera).then((img) => {
+				UIImageWriteToSavedPhotosAlbum(img)
+			})
+		},
 	}
 }
 </script>

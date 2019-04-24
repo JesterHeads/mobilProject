@@ -1,35 +1,35 @@
 <template>
     <GridLayout rows="320, *">
-        <Pager row="0" ref="pagerView" for="movie in movies"
+        <Pager row="0" ref="pagerView" for="group in groups"
             @selectedIndexChange="onSelect($event)" :selectedIndex="selectedIndex">
             <v-template>
                 <StackLayout>
                     <AbsoluteLayout width="224" height="320"
                         horizontalAlignment="center">
-                        <Image top="" height="100%" :src="movie.Poster" class="thumb movies-timeline__item"
-                            :class="{ 'is-watched': movie.watched }" stretch="aspectFit" />
-                        <Image v-show="movie.watched" left="70" top="130"
+                        <Image top="" height="100%" :src="group.Poster" class="thumb groups-timeline__item"
+                            :class="{ 'is-watched': group.watched }" stretch="aspectFit" />
+                        <Image v-show="group.watched" left="70" top="130"
                             height="70" stretch="aspectFit" src="~/images/tick.png" />
                     </AbsoluteLayout>
                 </StackLayout>
             </v-template>
         </Pager>
         <ScrollView row="1">
-            <StackLayout class="movies-timeline__movie" :class="{ 'is-watched': movie.watched }">
-                <Label class="movies-timeline__title" :text="movie.Title"
+            <StackLayout class="groups-timeline__group" :class="{ 'is-watched': group.watched }">
+                <Label class="groups-timeline__title" :text="group.Title"
                     textWrap="true" />
                 <FlexboxLayout justifyContent="space-between">
-                    <Label class="movies-timeline__total">
+                    <Label class="groups-timeline__total">
                         <FormattedString>
-                            <Span text="Movie: " />
+                            <Span text="Group: " />
                             <Span :text="selectedIndex + 1" fontWeight="bold" />
-                            <Span :text="` of ${moviesCount}`" />
+                            <Span :text="` of ${groupsCount}`" />
                         </FormattedString>
                     </Label>
-                    <Button class="movies-timeline__button" :text="watchedButtonLabel"
+                    <Button class="groups-timeline__button" :text="watchedButtonLabel"
                         @tap="onButtonTap" />
                 </FlexboxLayout>
-                <Label class="movies-timeline__desc" :text="movie.Plot"
+                <Label class="groups-timeline__desc" :text="group.Plot"
                     textWrap="true" />
             </StackLayout>
         </ScrollView>
@@ -38,10 +38,10 @@
 
 <script>
     export default {
-        name: "Timeline",
+        name: "Group",
 
         props: {
-            movies: {
+            groups: {
                 type: Array,
                 required: true
             },
@@ -52,32 +52,32 @@
         },
 
         computed: {
-            movie() {
-                return this.movies[this.selectedIndex];
+            group() {
+                return this.groups[this.selectedIndex];
             },
 
-            moviesCount() {
-                return this.movies.length;
+            groupsCount() {
+                return this.groups.length;
             },
 
             watchedButtonLabel() {
-                return this.movie.watched ? "Add to watch list" :
+                return this.group.watched ? "Add to watch list" :
                     "Watched it";
             },
 
-            selectedMovie() {
-                return this.movies[this.selectedIndex];
+            selectedGroup() {
+                return this.groups[this.selectedIndex];
             }
         },
         methods: {
             onButtonTap() {
-                const selectedMovie = this.movies[this.selectedIndex];
-                const currentToWatch = selectedMovie.watched;
+                const selectedGroup = this.groups[this.selectedIndex];
+                const currentToWatch = selectedGroup.watched;
 
                 this.$set(
-                    this.movies,
+                    this.groups,
                     this.selectedIndex,
-                    Object.assign(selectedMovie, {
+                    Object.assign(selectedGroup, {
                         watched: !currentToWatch
                     })
                 );
@@ -97,7 +97,7 @@
     $border-color: #fff;
     $marvel-red: #EB2328;
 
-    .movies-timeline {
+    .selectedGroups-timeline {
 
         &__item {
             opacity: 1;
@@ -108,14 +108,14 @@
         }
 
 
-        &__movie {
+        &__selectedGroup {
             padding: 40px;
             color: $text-color;
 
             &.is-watched {
                 color: $color-disabled;
 
-                .movies-timeline__total {
+                .selectedGroups-timeline__total {
                     color: $color-disabled;
                 }
             }

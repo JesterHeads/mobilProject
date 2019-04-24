@@ -5,10 +5,10 @@
                 <Image height="30" src="~/images/marvel-logo.png" stretch="aspectFit"
                     horizontalAlignment="center" class="logo" />
             </StackLayout>
-            <MoviesTimeline row="1" v-show="tabIndex === 0" :movies="movies"
-                :selected-index="selectedMovieIndex" @update:selected="onSelectedMovie" />
-            <WatchList row="1" v-show="tabIndex === 1" :movies="movies"
-                @update:tab="onTabChange" @update:selected="onSelectedMovie" />
+            <Group row="1" v-show="tabIndex === 0" :groups="groups"
+                :selected-index="selectedGroupIndex" @update:selected="onSelectedGroup" />
+            <GroupList row="1" v-show="tabIndex === 1" :groups="groups"
+                @update:tab="onTabChange" @update:selected="onSelectedGroup" />
             <FlexboxLayout row="2" height="60">
                 <Button v-for="(tab, index) in tabs" :key="index" width="50%"
                     :text="tab" class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }" />
@@ -18,24 +18,24 @@
 </template>
 
 <script>
-    import WatchList from "./WatchList";
-    import MoviesTimeline from "./MoviesTimeline";
+    import GroupList from "./GroupList";
+    import Group from "./Group";
     import timeline from "../data/timeline.json";
 
     export default {
         name: "App",
 
         components: {
-            WatchList,
-            MoviesTimeline
+            GroupList,
+            Group
         },
 
         data() {
             return {
                 tabIndex: 1,
-                movies: timeline,
-                selectedMovieIndex: 0,
-                tabs: ["Timeline", "Watch list"]
+                groups: timeline,
+                selectedGroupIndex: 0,
+                tabs: ["Group", "Group list"]
             };
         },
 
@@ -48,8 +48,8 @@
                 this.tabIndex = index;
             },
 
-            onSelectedMovie(index) {
-                this.selectedMovieIndex = index;
+            onSelectedGroup(index) {
+                this.selectedGroupIndex = index;
             }
         }
     };

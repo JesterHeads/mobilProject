@@ -37,7 +37,7 @@
 
         data() {
             return {
-                tabIndex: 0,
+                tabIndex: 1,
                 movies: timeline,
                 selectedMovieIndex: 0,
                 tabs: ["Timeline", "Watch list"]

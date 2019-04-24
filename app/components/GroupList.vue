@@ -2,7 +2,6 @@
     <ScrollView>
         <StackLayout class="group-list">
             <Label class="group-list__title" text="To Group" />
-            <Label class="group-list__subtitle" :text="groupListSubtitle" />
             <FlexboxLayout  flexWrap="wrap">
                 <StackLayout v-for="(group, index) in groups" width="30%"
                     :key="index" class="group-list__movie">
@@ -43,11 +42,6 @@
         &__title {
             font-size: 29px;
             font-weight: 700;
-        }
-
-        &__subtitle {
-            font-size: 16px;
-            padding: 20px 10px;
         }
 
         &__movie {

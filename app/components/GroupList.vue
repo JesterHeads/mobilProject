@@ -26,7 +26,7 @@
 
         methods: {
             onItemTap(title) {
-                const index = this.movies.findIndex(movie => movie.Title ===
+                const index = this.groups.findIndex(group => group.Title ===
                     title);
                 this.$emit("update:selected", index);
                 this.$emit("update:tab", 0);

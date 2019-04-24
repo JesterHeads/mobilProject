@@ -1,18 +1,12 @@
-import Vue from 'nativescript-vue';
+import Vue from 'nativescript-vue'
+import App from './components/App'
+import Pager from './nativescript-pager/vue'
 
-import HelloWorld from './components/HelloWorld';
+Vue.use(Pager)
 
 // Uncommment the following to see NativeScript-Vue output logs
-Vue.config.silent = false;
+// Vue.config.silent = false;
 
 new Vue({
-
-    template: `
-        <Frame>
-            <HelloWorld />
-        </Frame>`,
-
-    components: {
-        HelloWorld
-    }
+    render: h => h('frame', [h(App)])
 }).$start();

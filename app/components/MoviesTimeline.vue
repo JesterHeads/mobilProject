@@ -95,7 +95,7 @@
     $text-color: #fff;
     $color-disabled: #444444;
     $border-color: #fff;
-    $marvel-red: #EB2328;
+    $marvel-red: #1a6ef5;
 
     .movies-timeline {
 

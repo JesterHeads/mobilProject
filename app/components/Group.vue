@@ -1,36 +1,20 @@
 <template>
     <GridLayout rows="320, *">
+
         <Pager row="0" ref="pagerView" for="group in groups"
             @selectedIndexChange="onSelect($event)" :selectedIndex="selectedIndex">
             <v-template>
                 <StackLayout>
-                    <AbsoluteLayout width="224" height="320"
-                        horizontalAlignment="center">
-                        <Image top="" height="100%" :src="group.Poster" class="thumb groups-timeline__item"
-                            :class="{ 'is-watched': group.watched }" stretch="aspectFit" />
-                        <Image v-show="group.watched" left="70" top="130"
-                            height="70" stretch="aspectFit" src="~/images/tick.png" />
-                    </AbsoluteLayout>
+                    <Image top="" height="100%" :src="group.Poster" class="thumb groups-timeline__item" stretch="aspectFit" />
                 </StackLayout>
             </v-template>
         </Pager>
+
         <ScrollView row="1">
-            <StackLayout class="groups-timeline__group" :class="{ 'is-watched': group.watched }">
-                <Label class="groups-timeline__title" :text="group.Title"
-                    textWrap="true" />
-                <FlexboxLayout justifyContent="space-between">
-                    <Label class="groups-timeline__total">
-                        <FormattedString>
-                            <Span text="Group: " />
-                            <Span :text="selectedIndex + 1" fontWeight="bold" />
-                            <Span :text="` of ${groupsCount}`" />
-                        </FormattedString>
-                    </Label>
-                    <Button class="groups-timeline__button" :text="watchedButtonLabel"
-                        @tap="onButtonTap" />
-                </FlexboxLayout>
-                <Label class="groups-timeline__desc" :text="group.Plot"
-                    textWrap="true" />
+            <StackLayout class="groups-timeline__group">
+                <Label class="groups-timeline__title" :text="group.Title" textWrap="true" />
+                <Label class="groups-timeline__genre" text="Genre : Disco, Reggae" textWrap="true" />
+                <Label class="groups-timeline__desc"  :text="group.Plot"  textWrap="true" />
             </StackLayout>
         </ScrollView>
     </GridLayout>
@@ -95,61 +79,27 @@
     $text-color: #fff;
     $color-disabled: #444444;
     $border-color: #fff;
-    $marvel-red: #1a6ef5;
+    $blue: #1a6ef5;
 
-    .selectedGroups-timeline {
+    .groups-timeline__group {
 
-        &__item {
-            opacity: 1;
+        padding: 10px;
 
-            &.is-watched {
-                opacity: 0.5;
-            }
-        }
-
-
-        &__selectedGroup {
-            padding: 40px;
-            color: $text-color;
-
-            &.is-watched {
-                color: $color-disabled;
-
-                .selectedGroups-timeline__total {
-                    color: $color-disabled;
-                }
-            }
-        }
-
-        &__title {
+        .groups-timeline__title {
             font-size: 24px;
-            padding: 0 0 15px;
-            margin: 0 0 15px;
+            padding: 20px 0;
+            margin-bottom: 20px;
             font-weight: bold;
-            border-bottom-color: $marvel-red;
+            border-bottom-color: $blue;
             border-bottom-width: 2px;
+            text-align: center;
         }
 
-        &__button {
-            font-size: 16px;
-            color: $text-color;
-            background: $marvel-red;
-            border-radius: 8px;
-            height: 50px;
-            padding: 0 10px;
-            text-transform: capitalize;
-        }
 
-        &__total {
-            font-size: 16px;
-            padding: 10px;
-            background: #fff;
-            color: #000;
-        }
-
-        &__desc {
-            font-size: 13px;
-            margin-top: 30px;
+        .groups-timeline__desc{
+            padding: 20px;
+            margin: 0 auto;
+            text-align: justify;
         }
     }
 </style>

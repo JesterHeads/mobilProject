@@ -1,8 +1,8 @@
 <template>
-    <Page actionBarHidden="true" androidStatusBarBackground="#eb2328">
+    <Page actionBarHidden="true" androidStatusBarBackground="#1a6ef5">
         <GridLayout rows="50, *, 50">
             <StackLayout row="0" orientation="horizontal" horizontalAlignment="center">
-                <Image height="30" src="~/images/marvel-logo.png" stretch="aspectFit"
+                <Image height="30" src="~/images/logo.png" stretch="aspectFit"
                     horizontalAlignment="center" class="logo" />
             </StackLayout>
             <Group row="1" v-show="tabIndex === 0" :groups="groups"
@@ -57,13 +57,13 @@
 
 <style scoped lang="scss">
     Page {
-        background: linear-gradient(to bottom, #eb2328, #252323, #000);
+        background: linear-gradient(to bottom, #1a6ef5, #252323, #000);
         color: #fff;
         font-family: Helvetica, sans-serif;
     }
 
     .logo {
-        margin: 20px 0;
+        margin: 20px 0 40px 0;
     }
 
     .tab {
@@ -75,8 +75,8 @@
         text-transform: capitalize;
 
         &.is-active {
-            background: #fff;
-            color: #000;
+            background: #1a6ef5;
+            color: #fff;
         }
     }
 </style>

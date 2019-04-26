@@ -40,9 +40,6 @@
         },
 
         methods: {
-            onSelectedIndexChange(index) {
-                this.tabIndex = index.value;
-            },
 
             onTabChange(index) {
                 this.tabIndex = index;

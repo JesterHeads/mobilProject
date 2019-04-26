@@ -12,9 +12,9 @@
 
         <ScrollView row="1">
             <StackLayout class="groups-timeline__group">
-                <Label class="groups-timeline__title" :text="group.Title" textWrap="true" />
-                <Label class="groups-timeline__genre" text="Genre : Disco, Reggae" textWrap="true" />
-                <Label class="groups-timeline__desc"  :text="group.Plot"  textWrap="true" />
+                <Label class="groups-timeline__title" :text="group.Name" textWrap="true" />
+                <Label class="groups-timeline__genre" :text="group.genre" textWrap="true" />
+                <Label class="groups-timeline__desc"  :text="group.Presentation"  textWrap="true" />
             </StackLayout>
         </ScrollView>
     </GridLayout>
@@ -43,12 +43,6 @@
             groupsCount() {
                 return this.groups.length;
             },
-
-            watchedButtonLabel() {
-                return this.group.watched ? "Add to watch list" :
-                    "Watched it";
-            },
-
             selectedGroup() {
                 return this.groups[this.selectedIndex];
             }
@@ -56,14 +50,10 @@
         methods: {
             onButtonTap() {
                 const selectedGroup = this.groups[this.selectedIndex];
-                const currentToWatch = selectedGroup.watched;
 
                 this.$set(
                     this.groups,
                     this.selectedIndex,
-                    Object.assign(selectedGroup, {
-                        watched: !currentToWatch
-                    })
                 );
                 this.$refs.pagerView.nativeView.refresh(true);
             },

@@ -4,7 +4,7 @@
                 <Image height="30" src="~/images/logo.png" stretch="aspectFit"
                     horizontalAlignment="center" class="logo" />
 				<Label marginLeft="25" marginRight="25" text="Bienvenue dans notre application mobile"></Label>
-            	<Label marginLeft="25" marginRight="25" text="Le but de cette application est d'une part de mettre nos connaissances sur nativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
+            	<Label marginLeft="25" marginRight="25" text="Le but de cette application est d'une part de mettre nos connaissances sur NativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
             	<Button  text="Close" class="btn btn-primary" marginTop="20" @tap="$goTo('app',navOptions)"></Button>
             </StackLayout>
 	</Page>

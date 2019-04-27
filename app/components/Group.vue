@@ -10,13 +10,15 @@
             </v-template>
         </Pager>
 
-        <ScrollView row="1">
-            <StackLayout class="groups-timeline__group">
+            <StackLayout row="1" class="groups-timeline__group">
                 <Label class="groups-timeline__title" :text="group.Name" textWrap="true" />
-                <Label class="groups-timeline__genre" :text="group.genre" textWrap="true" />
-                <Label class="groups-timeline__desc"  :text="group.Presentation"  textWrap="true" />
+                <ScrollView row="1">
+                    <StackLayout>
+                        <Label class="groups-timeline__genre" :text="group.genre" textWrap="true" />
+                        <Label class="groups-timeline__desc"  :text="group.Presentation"  textWrap="true" />
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
-        </ScrollView>
     </GridLayout>
 </template>
 

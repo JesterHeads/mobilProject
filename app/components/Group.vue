@@ -5,7 +5,7 @@
             @selectedIndexChange="onSelect($event)" :selectedIndex="selectedIndex">
             <v-template>
                 <StackLayout>
-                    <Image top="" height="100%" :src="group.Poster" class="thumb groups-timeline__item" stretch="aspectFit" />
+                    <Image height="100%" :src="group.Poster" class="thumb groups-timeline__item" stretch="aspectFit" />
                 </StackLayout>
             </v-template>
         </Pager>
@@ -14,8 +14,9 @@
                 <Label class="groups-timeline__title" :text="group.Name" textWrap="true" />
                 <ScrollView row="1">
                     <StackLayout>
-                        <Label class="groups-timeline__genre" :text="group.genre" textWrap="true" />
-                        <Label class="groups-timeline__desc"  :text="group.Presentation"  textWrap="true" />
+                        <Label class="groups-timeline__genre"   :text="group.genre" textWrap="true" />
+                        <Label class="groups-timeline__website" :text="group.website" textWrap="true" @tap="openWebsite(group.website)"/>
+                        <Label class="groups-timeline__desc"    :text="group.Presentation"  textWrap="true" />
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
@@ -23,6 +24,9 @@
 </template>
 
 <script>
+
+    import * as utils from "tns-core-modules/utils/utils";
+
     export default {
         name: "Group",
 
@@ -50,18 +54,19 @@
             }
         },
         methods: {
-            onButtonTap() {
-                const selectedGroup = this.groups[this.selectedIndex];
-
-                this.$set(
-                    this.groups,
-                    this.selectedIndex,
-                );
-                this.$refs.pagerView.nativeView.refresh(true);
-            },
-
             onSelect(index) {
                 this.$emit("update:selected", index);
+            },
+            openWebsite(url){
+                confirm({
+                    title: "Attention",
+                    message: `Etes-vous sûr de vouloir être redirigé sur ${url} ?`,
+                    okButtonText: "Oui",
+                    cancelButtonText: "Annuler"
+                }).then((result) => {
+                    if(result)
+                        utils.openUrl(url);
+                });
             }
         }
     };
@@ -73,7 +78,7 @@
     $border-color: #fff;
     $blue: #1a6ef5;
 
-    .groups-timeline__group {
+     .groups-timeline__group {
 
         padding: 10px;
 
@@ -82,7 +87,7 @@
             padding: 20px 0;
             margin-bottom: 20px;
             font-weight: bold;
-            border-bottom-color: $blue;
+            border-bottom-color: #FED55F;
             border-bottom-width: 2px;
             text-align: center;
         }

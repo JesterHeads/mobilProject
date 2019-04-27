@@ -1,12 +1,16 @@
 <template>
-	<Page actionBarHidden="true" androidStatusBarBackground="#1a6ef5">
-            <StackLayout orientation="vertical" horizontalAlignment="center">
-                <Image height="30" src="~/images/logo.png" stretch="aspectFit"
+	<Page actionBarHidden="true" androidStatusBarBackground="#FED55F">
+            <FlexboxLayout flexDirection="column" justifyContent="space-between">
+                <Image height="150" src="~/images/logo-max.png" stretch="aspectFit"
                     horizontalAlignment="center" class="logo" />
-				<Label marginLeft="25" marginRight="25" text="Bienvenue dans notre application mobile"></Label>
-            	<Label marginLeft="25" marginRight="25" text="Le but de cette application est d'une part de mettre nos connaissances sur NativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
-            	<Button  text="Close" class="btn btn-primary" marginTop="20" @tap="$goTo('app',navOptions)"></Button>
-            </StackLayout>
+
+                <StackLayout>
+                    <Label class="desc" marginLeft="25" marginRight="25" text="Bienvenue dans notre application mobile"></Label>
+                    <Label class="desc" marginLeft="25" marginRight="25" text="Le but de cette application est d'une part de mettre nos connaissances sur NativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
+            	</StackLayout>
+
+                <Button  text="Découvrir" class="btn-yellow" marginTop="20" @tap="$goTo('app',navOptions)"></Button>
+            </FlexboxLayout>
 	</Page>
 </template>
 
@@ -18,9 +22,8 @@ export default {
                 clearHistory: true,
                 backstackVisible: true,
                 transition: {
-                    name: "fade",
-                    duration: 380,
-                    curve: "easeOut"
+                    name: "slide",
+                    duration: 380
                 }
             }
         }
@@ -30,13 +33,29 @@ export default {
 
 <style scoped>
 	Page {
-        background: linear-gradient(to bottom, #1a6ef5, #252323, #000);
+        background: linear-gradient(to bottom, #1a6ef5, #1839ad, #1839ad);
         color: #fff;
         font-family: Helvetica, sans-serif;
+        padding: 60px;
     }
 
     .logo {
         margin: 20px 0 40px 0;
+    }
+
+    .desc{
+        background: #fff;
+        color : #1E243A;
+        padding: 40px;
+        border-radius: 4px;
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .btn-yellow{
+        background: #FED55F;
+        border-radius: 4px;
+        color: #1E243A
     }
 </style>
 

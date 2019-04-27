@@ -1,17 +1,21 @@
 <template>
-    <Page actionBarHidden="true" androidStatusBarBackground="#1a6ef5">
+    <Page @swipe="swipe" actionBarHidden="true" androidStatusBarBackground="#FED55F">
+
         <GridLayout rows="50, *, 50">
             <StackLayout row="0" orientation="horizontal" horizontalAlignment="center">
                 <Image height="30" src="~/images/logo.png" stretch="aspectFit"
                     horizontalAlignment="center" class="logo" />
             </StackLayout>
-            <Group row="1" v-show="tabIndex === 0" :groups="groups"
+            <Group row="1" v-show="tabIndex === 2" :groups="groups"
                 :selected-index="selectedGroupIndex" @update:selected="onSelectedGroup" />
             <GroupList row="1" v-show="tabIndex === 1" :groups="groups"
                 @update:tab="onTabChange" @update:selected="onSelectedGroup" />
             <FlexboxLayout row="2" height="60">
-                <Button v-for="(tab, index) in tabs" :key="index" width="50%"
-                    :text="tab" class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }" />
+                <Image v-for="(tab, index) in tabs"  :key="index" 
+                    height="30" :src="'~/images/menu/' + tab" stretch="aspectFit"
+                    width="50%"
+                    class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }"
+                    />
             </FlexboxLayout>
         </GridLayout>
     </Page>
@@ -21,6 +25,9 @@
     import GroupList from "./GroupList";
     import Group from "./Group";
     import timeline from "../data/timeline.json";
+
+    import GestureTypes from "tns-core-modules/ui/gestures";
+
 
     export default {
         name: "App",
@@ -35,18 +42,36 @@
                 tabIndex: 1,
                 groups: timeline,
                 selectedGroupIndex: 0,
-                tabs: ["Group", "Group list"]
+                tabs: ["home.png", "list.png", "user.png"]
             };
         },
 
         methods: {
 
             onTabChange(index) {
-                this.tabIndex = index;
+                if(index == 0){
+                    this.$goTo('home', {
+                        clearHistory: true,
+                        backstackVisible: true,
+                        transition: {
+                            name: "slideRight",
+                            duration: 380
+                        }
+                    });
+                }else{
+                    this.tabIndex = index;
+                }
             },
 
             onSelectedGroup(index) {
                 this.selectedGroupIndex = index;
+            },
+
+            swipe(args){
+                if(args.direction == 2 && this.tabIndex == 1)
+                    this.tabIndex++;
+                else if(args.direction == 1 && this.tabIndex == 2)
+                    this.tabIndex--;
             }
         }
     };
@@ -54,7 +79,7 @@
 
 <style scoped lang="scss">
     Page {
-        background: linear-gradient(to bottom, #1a6ef5, #252323, #000);
+        background: linear-gradient(to bottom, #1a6ef5, #1839ad, #1839ad);
         color: #fff;
         font-family: Helvetica, sans-serif;
     }
@@ -67,13 +92,12 @@
         text-align: center;
         font-weight: 700;
         font-size: 19px;
-        background: #000;
-        color: #fff;
-        text-transform: capitalize;
+        background: #1E243A;
+        padding: 40px;
 
         &.is-active {
-            background: #1a6ef5;
-            color: #fff;
+            background: #FED55F;
+            
         }
     }
 </style>

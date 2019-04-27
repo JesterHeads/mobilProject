@@ -2,35 +2,116 @@
     {
         "Name": "Uppermost",
         "Presentation": "Uppermost est un producteur de musique électronique français basé à Paris. Il a commencé à produire de la musique en utilisant FL Studio à l'âge de 17 ans. Sa musique a été publiée par des labels tels que Sony BMG, Ministry of Sound, BugEyed Records et Starlight Records, il détient d'ailleurs son propre label : Uppwind Records.",
-        "website"  : "",
+        "website"  : "https://www.uppermostmusic.com/",
         "genre" : "Electro", 
         "Poster": "~/images/groups/uppermost.jpg"
     },
     {
         "Name": "Parkway Drive",
         "Presentation": "Parkway Drive est un groupe de metalcore australien, originaire de Byron Bay, en Nouvelle-Galles du Sud.",
-        "website"  : "",
+        "website"  : "https://parkwaydriverock.com/",
         "genre" : "Métal", 
         "Poster": "~/images/groups/parkway.jpg"
     },
     {
         "Name": "Cypress Hill",
         "Presentation": "Steve Rogers, a rejected military soldier transforms into Captain America after taking a dose of a \"Super-Soldier serum\". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.",
-        "website"  : "",
+        "website"  : "https://cypresshill.com/",
         "genre" : "Rap", 
         "Poster": "~/images/groups/cypress.jpg"
     },
     {
         "Name": "Tom Day",
         "Presentation": "Tom Day is a solo producer residing in Melbourne, Australia and has been creating ambient and electronic music since 2005. Characterised as “effortless and raw”, Tom’s tracks couple elegant beats and piano melodies to an array of personally-collected field recordings, his style alternating between promising swells and restful plateaus. The music of Tom Day has been used in independent film and documentaries from around the world, and clients who have licensed his tracks include National Geographic, Volvo, New York Times, Holden and Momondo. Tom releases music independently and, in 2015, played several live shows in Melbourne, including Melbourne Music Week. Having worked on an array of joint projects with other musicians and visual artists.",
-        "website"  : "",
+        "website"  : "https://www.tomday.me/",
         "genre" : "Electro/Ambient", 
         "Poster": "~/images/groups/tomday.jpg"
     },
     {
         "Name": "Tryo",
         "Presentation": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
-        "website" : "",
+        "website" : "https://tryo.com/",
+        "genre" : "Raegge",
+        "Poster": "~/images/groups/tryo.jpg"
+    },
+
+
+
+
+
+
+
+
+
+
+    
+
+    {
+        "Name": "Uppermost",
+        "Presentation": "Uppermost est un producteur de musique électronique français basé à Paris. Il a commencé à produire de la musique en utilisant FL Studio à l'âge de 17 ans. Sa musique a été publiée par des labels tels que Sony BMG, Ministry of Sound, BugEyed Records et Starlight Records, il détient d'ailleurs son propre label : Uppwind Records.",
+        "website"  : "https://www.uppermostmusic.com/",
+        "genre" : "Electro", 
+        "Poster": "~/images/groups/uppermost.jpg"
+    },
+    {
+        "Name": "Parkway Drive",
+        "Presentation": "Parkway Drive est un groupe de metalcore australien, originaire de Byron Bay, en Nouvelle-Galles du Sud.",
+        "website"  : "https://parkwaydriverock.com/",
+        "genre" : "Métal", 
+        "Poster": "~/images/groups/parkway.jpg"
+    },
+    {
+        "Name": "Cypress Hill",
+        "Presentation": "Steve Rogers, a rejected military soldier transforms into Captain America after taking a dose of a \"Super-Soldier serum\". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.",
+        "website"  : "https://cypresshill.com/",
+        "genre" : "Rap", 
+        "Poster": "~/images/groups/cypress.jpg"
+    },
+    {
+        "Name": "Tom Day",
+        "Presentation": "Tom Day is a solo producer residing in Melbourne, Australia and has been creating ambient and electronic music since 2005. Characterised as “effortless and raw”, Tom’s tracks couple elegant beats and piano melodies to an array of personally-collected field recordings, his style alternating between promising swells and restful plateaus. The music of Tom Day has been used in independent film and documentaries from around the world, and clients who have licensed his tracks include National Geographic, Volvo, New York Times, Holden and Momondo. Tom releases music independently and, in 2015, played several live shows in Melbourne, including Melbourne Music Week. Having worked on an array of joint projects with other musicians and visual artists.",
+        "website"  : "https://www.tomday.me/",
+        "genre" : "Electro/Ambient", 
+        "Poster": "~/images/groups/tomday.jpg"
+    },
+    {
+        "Name": "Tryo",
+        "Presentation": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+        "website" : "https://tryo.com/",
+        "genre" : "Raegge",
+        "Poster": "~/images/groups/tryo.jpg"
+    },{
+        "Name": "Uppermost",
+        "Presentation": "Uppermost est un producteur de musique électronique français basé à Paris. Il a commencé à produire de la musique en utilisant FL Studio à l'âge de 17 ans. Sa musique a été publiée par des labels tels que Sony BMG, Ministry of Sound, BugEyed Records et Starlight Records, il détient d'ailleurs son propre label : Uppwind Records.",
+        "website"  : "https://www.uppermostmusic.com/",
+        "genre" : "Electro", 
+        "Poster": "~/images/groups/uppermost.jpg"
+    },
+    {
+        "Name": "Parkway Drive",
+        "Presentation": "Parkway Drive est un groupe de metalcore australien, originaire de Byron Bay, en Nouvelle-Galles du Sud.",
+        "website"  : "https://parkwaydriverock.com/",
+        "genre" : "Métal", 
+        "Poster": "~/images/groups/parkway.jpg"
+    },
+    {
+        "Name": "Cypress Hill",
+        "Presentation": "Steve Rogers, a rejected military soldier transforms into Captain America after taking a dose of a \"Super-Soldier serum\". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.",
+        "website"  : "https://cypresshill.com/",
+        "genre" : "Rap", 
+        "Poster": "~/images/groups/cypress.jpg"
+    },
+    {
+        "Name": "Tom Day",
+        "Presentation": "Tom Day is a solo producer residing in Melbourne, Australia and has been creating ambient and electronic music since 2005. Characterised as “effortless and raw”, Tom’s tracks couple elegant beats and piano melodies to an array of personally-collected field recordings, his style alternating between promising swells and restful plateaus. The music of Tom Day has been used in independent film and documentaries from around the world, and clients who have licensed his tracks include National Geographic, Volvo, New York Times, Holden and Momondo. Tom releases music independently and, in 2015, played several live shows in Melbourne, including Melbourne Music Week. Having worked on an array of joint projects with other musicians and visual artists.",
+        "website"  : "https://www.tomday.me/",
+        "genre" : "Electro/Ambient", 
+        "Poster": "~/images/groups/tomday.jpg"
+    },
+    {
+        "Name": "Tryo",
+        "Presentation": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+        "website" : "https://tryo.com/",
         "genre" : "Raegge",
         "Poster": "~/images/groups/tryo.jpg"
     }

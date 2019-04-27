@@ -3,8 +3,8 @@
         <StackLayout class="group-list">
             <FlexboxLayout flexWrap="wrap" justifyContent="center">
                 <StackLayout v-for="(group, index) in groups" width="30%"
-                    :key="index" class="group-list__movie">
-                    <Image @tap="onItemTap(group.Name)" :src="group.Poster"
+                    :key="index" class="group-list__group">
+                    <Image class="group" @tap="onItemTap(group.Name)" :src="group.Poster"
                         height="150" stretch="aspectFill" />
                 </StackLayout>
             </FlexboxLayout>
@@ -28,7 +28,7 @@
                 const index = this.groups.findIndex(group => group.Name ===
                     title);
                 this.$emit("update:selected", index);
-                this.$emit("update:tab", 0);
+                this.$emit("update:tab", 2);
             }
         }
     };
@@ -44,8 +44,11 @@
             margin : 26px 0;
         }
 
-        &__movie {
+        &__group {
             margin: 0 10px 20px;
+            .group{
+                border-radius: 10px;
+            }
         }
 
     }

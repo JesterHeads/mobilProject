@@ -1,5 +1,5 @@
 <template>
-    <Page @swipe="swipe" actionBarHidden="true" androidStatusBarBackground="#FED55F">
+    <Page actionBarHidden="true" androidStatusBarBackground="#FED55F">
 
         <GridLayout rows="50, *, 50">
             <StackLayout row="0" orientation="horizontal" horizontalAlignment="center">
@@ -65,13 +65,6 @@
 
             onSelectedGroup(index) {
                 this.selectedGroupIndex = index;
-            },
-
-            swipe(args){
-                if(args.direction == 2 && this.tabIndex == 1)
-                    this.tabIndex++;
-                else if(args.direction == 1 && this.tabIndex == 2)
-                    this.tabIndex--;
             }
         }
     };

@@ -12,7 +12,7 @@
                 @update:tab="onTabChange" @update:selected="onSelectedGroup" />
             <FlexboxLayout row="2" height="60">
                 <Image v-for="(tab, index) in tabs"  :key="index" 
-                    height="30" :src="'~/images/menu/' + tab" stretch="aspectFit"
+                    height="5" :src="'~/images/menu/' + tab" stretch="aspectFit"
                     width="50%" 
                     class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }"
                     />
@@ -24,7 +24,7 @@
 <script>
     import GroupList from "./GroupList";
     import Group from "./Group";
-    import timeline from "../data/timeline.json";
+    import groups from "../data/groups.json";
 
     import GestureTypes from "tns-core-modules/ui/gestures";
 
@@ -40,7 +40,7 @@
         data() {
             return {
                 tabIndex: 1,
-                groups: timeline,
+                groups: groups,
                 selectedGroupIndex: 0,
                 tabs: ["home.png", "list.png", "user.png"]
             };
@@ -81,7 +81,7 @@
         text-align: center;
         font-weight: 700;
         font-size: 19px;
-        padding : 40px;
+        padding : 500px;
         background: #1E243A;
 
         &.is-active {

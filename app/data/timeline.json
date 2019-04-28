@@ -29,7 +29,7 @@
     },
     {
         "Name": "Tryo",
-        "Presentation": ".",
+        "Presentation": "Tryo est un groupe de chanson française à forte influence reggae. Bien que son nom puisse prêter à confusion, Tryo est composé de quatre membres sur scène : Guizmo, Christophe Mali, Manu Eveno et Daniel Bravo.\n Leur producteur exécutif et coproducteur, Sébastien Pujol prend une part importante dans les activités du groupe, si bien qu'il est compté comme son cinquième membre. Les débuts de Tryo sont tournés vers une musique acoustique inspirée du reggae qui fera naître deux premiers albums 'Mamagubida' en 1998 et 'Faut qu'ils s'activent' en 2000.\n Avec leur troisième album 'Grain de sable', en 2003, ils s'ouvrent à d'autres influences, notamment le jazz. Leur album 'Ce que l'on sème', sorti en novembre 2008, affirme cette évolution en proposant une palette musicale apportant des sons venant des quatre coins du monde",
         "website" : "https://tryo.com/",
         "genre" : "Raegge",
         "Poster": "~/images/groups/tryo.jpg"
@@ -40,6 +40,13 @@
         "website" : "http://www.inflames.com/",
         "genre" : "Metal Alternatif/Death Métal melodique",
         "Poster": "~/images/groups/inflames.jpg"
+    },
+    {
+        "Name": "Daft Punk",
+        "Presentation": "Daft Punk est un duo de musique électronique français, originaire de Paris et composé de Thomas Bangalter et Guy-Manuel de Homem-Christo. Suite au succès de leur premier single 'Da Funk' sorti en 1997, Daft Punk sort sont premier album 'HomeWork' la même année qui fait le succès du groupe par son style House/techno et permet au groupe de populariser le style de musique électronique 'French Touch' dans le monde entier.\n Le succès du groupe est également du aux clips qui accompagne leurs musiques, clip qui prennent la forme de petits dessins animés mettant en scène des personnages colorés jouant la musique du groupe. Les Daft Punk sont également connus pour ne jamais montrer leur visage au public, portant toujours des casques et costumes.",
+        "website" : "http://www.daftalive.com/",
+        "genre" : "Metal Alternatif/Death Métal melodique",
+        "Poster": "~/images/groups/daftpunk.jpg"
     },
     {
         "Name": "Mac Miller",

@@ -10,9 +10,9 @@
                 :selected-index="selectedGroupIndex" @update:selected="onSelectedGroup" />
             <GroupList row="1" v-show="tabIndex === 1" :groups="groups"
                 @update:tab="onTabChange" @update:selected="onSelectedGroup" />
-            <FlexboxLayout row="2" height="60">
+            <FlexboxLayout row="2" height="50">
                 <Image v-for="(tab, index) in tabs"  :key="index" 
-                    height="30" :src="'~/images/menu/' + tab" stretch="aspectFit"
+                    height="20%" :src="'~/images/menu/' + tab" stretch="aspectFit"
                     width="50%"
                     class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }"
                     />

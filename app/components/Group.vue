@@ -5,18 +5,18 @@
             @selectedIndexChange="onSelect($event)" :selectedIndex="selectedIndex">
             <v-template>
                 <StackLayout>
-                    <Image height="100%" :src="group.Poster" class="thumb groups-timeline__item" stretch="aspectFit" />
+                    <Image height="100%" :src="group.Poster" class="thumb" stretch="aspectFit" />
                 </StackLayout>
             </v-template>
         </Pager>
 
-            <StackLayout row="1" class="groups-timeline__group">
-                <Label class="groups-timeline__title" :text="group.Name" textWrap="true" />
+            <StackLayout row="1" class="group">
+                <Label class="group-title" :text="group.Name" textWrap="true" />
                 <ScrollView row="1">
-                    <StackLayout>
-                        <Label class="groups-timeline__genre"   :text="group.genre" textWrap="true" />
+                    <StackLayout class="group-info">
+                        <Label :text="'Genre : ' + group.genre" textWrap="true" />
                         <Label class="groups-timeline__website" :text="group.website" textWrap="true" @tap="openWebsite(group.website)"/>
-                        <Label class="groups-timeline__desc"    :text="group.Presentation"  textWrap="true" />
+                        <Label  :text="group.Presentation"  textWrap="true" />
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
@@ -78,11 +78,11 @@
     $border-color: #fff;
     $blue: #1a6ef5;
 
-     .groups-timeline__group {
+     .group {
 
-        padding: 10px;
+        padding: 15px;
 
-        .groups-timeline__title {
+        .group-title {
             font-size: 24px;
             padding: 20px 0;
             margin-bottom: 20px;
@@ -92,8 +92,7 @@
             text-align: center;
         }
 
-
-        .groups-timeline__desc{
+        .group-info *{
             padding: 20px;
             margin: 0 auto;
             text-align: justify;

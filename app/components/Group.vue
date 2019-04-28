@@ -11,11 +11,11 @@
         </Pager>
 
             <StackLayout row="1" class="group">
-                <Label class="group-title" :text="group.Name" textWrap="true" />
+                <Label class="title" :text="group.Name" textWrap="true" />
                 <ScrollView row="1">
-                    <StackLayout class="group-info">
+                    <StackLayout class="info">
                         <Label :text="'Genre : ' + group.genre" textWrap="true" />
-                        <Label class="groups-timeline__website" :text="group.website" textWrap="true" @tap="openWebsite(group.website)"/>
+                        <Label class="website" :text="group.website" textWrap="true" @tap="openWebsite(group.website)"/>
                         <Label  :text="group.Presentation"  textWrap="true" />
                     </StackLayout>
                 </ScrollView>
@@ -82,7 +82,7 @@
 
         padding: 15px;
 
-        .group-title {
+        .title {
             font-size: 24px;
             padding: 20px 0;
             margin-bottom: 20px;
@@ -92,10 +92,14 @@
             text-align: center;
         }
 
-        .group-info *{
+        .info *{
             padding: 20px;
             margin: 0 auto;
             text-align: justify;
+        }
+
+        .info .website{
+            text-decoration: underline
         }
     }
 </style>

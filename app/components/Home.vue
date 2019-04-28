@@ -2,10 +2,10 @@
 	<Page actionBarHidden="true" androidStatusBarBackground="#FED55F">
             <FlexboxLayout flexDirection="column" justifyContent="space-between">
                 <Image height="150" src="~/images/logo-max.png" stretch="aspectFit"
-                    horizontalAlignment="center" class="logo" />
+                    horizontalAlignment="center" marginTop="10"/>
 
-                <StackLayout margin="20">
-                    <Label class="desc" text="Bienvenue dans notre application mobile"></Label>
+                <StackLayout margin="0 20">
+                    <Label class="desc" text="Bienvenue dans notre projet pour le cours de Technologies Web pour la mobilité"  textWrap="true"></Label>
                     <Label class="desc" text="Le but de cette application est d'une part de mettre nos connaissances sur NativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
             	</StackLayout>
 
@@ -38,16 +38,13 @@ export default {
 		font-family: Helvetica, sans-serif;
     }
 
-    .logo {
-        margin: 20px 0 40px 0;
-    }
-
     .desc{
         background: #fff;
-        color : #1E243A;
-        padding: 40px;
+		color : #1E243A;
+		padding : 30px;
+		margin : 20 0;
+		word-wrap: break-word;
         border-radius: 4px;
-        margin: 20px 20px;
         width: 100%;
     }
 

@@ -4,15 +4,15 @@
         <GridLayout rows="50, *, 50">
             <StackLayout row="0" orientation="horizontal" horizontalAlignment="center">
                 <Image height="30" src="~/images/logo.png" stretch="aspectFit"
-                    horizontalAlignment="center" class="logo" />
+                    horizontalAlignment="center" />
             </StackLayout>
             <Group row="1" v-show="tabIndex === 2" :groups="groups"
                 :selected-index="selectedGroupIndex" @update:selected="onSelectedGroup" />
             <GroupList row="1" v-show="tabIndex === 1" :groups="groups"
                 @update:tab="onTabChange" @update:selected="onSelectedGroup" />
-            <FlexboxLayout row="2" height="50">
+            <FlexboxLayout row="2" height="60">
                 <Image v-for="(tab, index) in tabs"  :key="index" 
-                    height="20%" :src="'~/images/menu/' + tab" stretch="aspectFit"
+                    height="30" :src="'~/images/menu/' + tab" stretch="aspectFit"
                     width="50%"
                     class="tab" @tap="onTabChange(index)" :class="{ 'is-active': tabIndex === index }"
                     />
@@ -77,16 +77,12 @@
         font-family: Helvetica, sans-serif;
     }
 
-    .logo {
-        margin: 20px 0 40px 0;
-    }
-
     .tab {
         text-align: center;
         font-weight: 700;
         font-size: 19px;
+        padding : 40px;
         background: #1E243A;
-        padding: 40px;
 
         &.is-active {
             background: #FED55F;

@@ -6,7 +6,7 @@
 
                 <StackLayout margin="0 20">
                     <Label class="desc" text="Bienvenue dans notre projet pour le cours de Technologies Web pour la mobilité"  textWrap="true"></Label>
-                    <Label class="desc" text="Le but de cette application est d'une part de mettre nos connaissances sur NativeScript à l'oeuvre, et d'autre part présenter des groupes de musiques que nous aimons" textWrap="true"></Label>
+                    <Label class="desc" text="Le but de cette application est d'une part d'explorer les possibilités offertes par NativeScript pour le développement d'applications mobiles native, et d'autre part présenter des groupes de musiques que nous aimons." textWrap="true"></Label>
             	</StackLayout>
 
                 <Button  text="Découvrir" class="btn-yellow" margin="20" @tap="$goTo('app',navOptions)"></Button>
